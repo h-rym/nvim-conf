@@ -31,5 +31,6 @@ require("lazy").setup({
     { import = "plugins.flash" },
     { import = "plugins.surround" },
     { import = "plugins.sleuth" },
+    { import = "plugins.todo-comments" },
   },
 })

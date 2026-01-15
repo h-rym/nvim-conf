@@ -25,6 +25,7 @@
 | [targets.vim](https://github.com/wellle/targets.vim) | Enhanced text objects |
 | [auto-save.nvim](https://github.com/okuuva/auto-save.nvim) | Auto save |
 | [vim-sleuth](https://github.com/tpope/vim-sleuth) | Auto detect indent |
+| [todo-comments.nvim](https://github.com/folke/todo-comments.nvim) | Highlight TODO comments |
 
 ## Keymaps
 
@@ -51,6 +52,7 @@
 | `<Space>fb` | Buffers |
 | `<Space>fh` | Help tags |
 | `<Space>fr` | Recent files |
+| `<Space>ft` | Find TODOs |
 
 ### Buffer (barbar)
 
@@ -87,6 +89,13 @@
 | `zR` | Open all folds |
 | `zM` | Close all folds |
 
+### TODO Comments
+
+| Key | Action |
+|-----|--------|
+| `]t` | Next TODO |
+| `[t` | Previous TODO |
+
 ## Directory Structure
 
 ```
@@ -109,6 +118,7 @@
         ├── surround.lua
         ├── targets.lua
         ├── telescope.lua
+        ├── todo-comments.lua
         ├── treesitter.lua
         └── ufo.lua
 ```
