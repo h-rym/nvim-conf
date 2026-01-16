@@ -5,7 +5,7 @@ vim.g.mapleader = " "
 vim.opt.number = true
 
 -- 相対行番号を表示
-vim.opt.relativenumber = true 
+vim.opt.relativenumber = true
 
 -- クリップボード連携 (MacのCommand+C/Vと共有するのに必須)
 vim.opt.clipboard = "unnamedplus"

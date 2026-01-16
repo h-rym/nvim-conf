@@ -7,7 +7,6 @@ return {
     "hrsh7th/cmp-nvim-lsp",
   },
   config = function()
-    local lspconfig = require("lspconfig")
     local capabilities = require("cmp_nvim_lsp").default_capabilities()
 
     -- キーマップ設定
@@ -29,8 +28,10 @@ return {
       end,
     })
 
-    -- Lua LSP
-    lspconfig.lua_ls.setup({
+    vim.lsp.config.lua_ls = {
+      cmd = { "lua-language-server" },
+      filetypes = { "lua" },
+      root_markers = { ".luarc.json", ".luarc.jsonc", ".luacheckrc", ".stylua.toml", "stylua.toml", "selene.toml", "selene.yml", ".git" },
       capabilities = capabilities,
       settings = {
         Lua = {
@@ -49,6 +50,7 @@ return {
           },
         },
       },
-    })
+    }
+    vim.lsp.enable("lua_ls")
   end,
 }
