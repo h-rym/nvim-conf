@@ -45,5 +45,6 @@ require("lazy").setup({
     { import = "plugins.peek" },
     { import = "plugins.lint" },
     { import = "plugins.noice" },
+    { import = "plugins.claudecode" },
   },
 })
