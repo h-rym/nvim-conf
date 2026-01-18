@@ -53,13 +53,9 @@ return {
       }),
     })
 
-    local cmdline_mapping = cmp.mapping.preset.cmdline({
-      ["<CR>"] = cmp.mapping.confirm({ select = false }),
-    })
-
     -- `/` 検索補完
     cmp.setup.cmdline({ "/", "?" }, {
-      mapping = cmdline_mapping,
+      mapping = cmp.mapping.preset.cmdline(),
       sources = {
         { name = "buffer" },
       },
@@ -67,7 +63,7 @@ return {
 
     -- `:` コマンドライン補完
     cmp.setup.cmdline(":", {
-      mapping = cmdline_mapping,
+      mapping = cmp.mapping.preset.cmdline(),
       sources = cmp.config.sources({
         { name = "path" },
       }, {
