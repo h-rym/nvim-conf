@@ -44,6 +44,8 @@
 | [octo.nvim](https://github.com/pwntester/octo.nvim) | GitHub PR / Issue manager |
 | [peek.nvim](https://github.com/toppair/peek.nvim) | Markdown preview |
 | [nvim-lint](https://github.com/mfussenegger/nvim-lint) | Linting (textlint for Japanese) |
+| [noice.nvim](https://github.com/folke/noice.nvim) | Enhanced UI (cmdline, messages, notifications) |
+| [claudecode.nvim](https://github.com/coder/claudecode.nvim) | Claude Code integration |
 
 ## Keymaps
 
@@ -81,6 +83,8 @@
 | `<Option-c>` | Close buffer |
 | `<Option-p>` | Pin buffer |
 | `<Option-1~5>` | Go to buffer 1~5 |
+| `<Space>bc` | Close all but current |
+| `<Space>ba` | Close all buffers |
 
 ### Navigation (flash)
 
@@ -157,6 +161,7 @@
 | `<Space>xx` | Toggle all diagnostics |
 | `<Space>xd` | Toggle buffer diagnostics |
 | `<Space>xq` | Toggle quickfix |
+| `<Space>xf` | Focus Trouble panel |
 
 #### Inside Trouble panel
 
@@ -198,6 +203,7 @@
 | `<Space>gv` | Open Diffview |
 | `<Space>gh` | File history |
 | `<Space>gH` | Branch history |
+| `<Space>e` | Toggle file panel (in diffview) |
 
 ### GitHub (octo)
 
@@ -213,6 +219,13 @@
 |-----|--------|
 | `<Space>mp` | Toggle preview |
 
+### Claude Code
+
+| Key | Action |
+|-----|--------|
+| `<Space>as` | Send selection to Claude (visual) |
+| `<Space>ab` | Add current buffer to Claude |
+
 ## Directory Structure
 
 ```
@@ -226,6 +239,7 @@
         ├── autopairs.lua
         ├── autosave.lua
         ├── barbar.lua
+        ├── claudecode.lua
         ├── cmp.lua
         ├── colorscheme.lua
         ├── diffview.lua
@@ -237,6 +251,7 @@
         ├── lspconfig.lua
         ├── lualine.lua
         ├── mason.lua
+        ├── noice.lua
         ├── nvim-tree.lua
         ├── octo.lua
         ├── oil.lua
