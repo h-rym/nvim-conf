@@ -37,6 +37,7 @@
 | [trouble.nvim](https://github.com/folke/trouble.nvim) | Diagnostics list |
 | [lazygit.nvim](https://github.com/kdheepak/lazygit.nvim) | Git UI |
 | [gitsigns.nvim](https://github.com/lewis6991/gitsigns.nvim) | Git signs / blame |
+| [diffview.nvim](https://github.com/sindrets/diffview.nvim) | Git diff / history viewer |
 
 ## Keymaps
 
@@ -184,6 +185,14 @@
 | `<Space>gd` | Diff this |
 | `ih` | Hunk text object |
 
+### Git (diffview)
+
+| Key | Action |
+|-----|--------|
+| `<Space>gv` | Open Diffview |
+| `<Space>gh` | File history |
+| `<Space>gH` | Branch history |
+
 ## Directory Structure
 
 ```
@@ -199,6 +208,7 @@
         ├── barbar.lua
         ├── cmp.lua
         ├── colorscheme.lua
+        ├── diffview.lua
         ├── fidget.lua
         ├── flash.lua
         ├── gitsigns.lua

@@ -40,5 +40,6 @@ require("lazy").setup({
     { import = "plugins.trouble" },
     { import = "plugins.lazygit" },
     { import = "plugins.gitsigns" },
+    { import = "plugins.diffview" },
   },
 })
