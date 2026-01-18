@@ -5,6 +5,7 @@
 - Neovim >= 0.9
 - ripgrep (for telescope live_grep)
 - lazygit (for lazygit.nvim)
+- neovim-remote (for lazygit.nvim integration)
 - Nerd Font (for icons)
 
 ## Plugins
@@ -35,6 +36,7 @@
 | [fidget.nvim](https://github.com/j-hui/fidget.nvim) | LSP progress UI |
 | [trouble.nvim](https://github.com/folke/trouble.nvim) | Diagnostics list |
 | [lazygit.nvim](https://github.com/kdheepak/lazygit.nvim) | Git UI |
+| [gitsigns.nvim](https://github.com/lewis6991/gitsigns.nvim) | Git signs / blame |
 
 ## Keymaps
 
@@ -160,11 +162,27 @@
 | `q` | Close |
 | `s` | Sort by severity |
 
-### Git
+### Git (lazygit)
 
 | Key | Action |
 |-----|--------|
 | `<Space>gg` | Open LazyGit |
+
+### Git (gitsigns)
+
+| Key | Action |
+|-----|--------|
+| `]c` / `[c` | Next / previous hunk |
+| `<Space>gs` | Stage hunk |
+| `<Space>gr` | Reset hunk |
+| `<Space>gS` | Stage buffer |
+| `<Space>gu` | Undo stage hunk |
+| `<Space>gR` | Reset buffer |
+| `<Space>gp` | Preview hunk |
+| `<Space>gb` | Blame line (popup) |
+| `<Space>gB` | Toggle inline blame |
+| `<Space>gd` | Diff this |
+| `ih` | Hunk text object |
 
 ## Directory Structure
 
@@ -183,6 +201,7 @@
         ├── colorscheme.lua
         ├── fidget.lua
         ├── flash.lua
+        ├── gitsigns.lua
         ├── lazygit.lua
         ├── lspconfig.lua
         ├── lualine.lua

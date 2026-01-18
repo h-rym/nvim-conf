@@ -14,4 +14,8 @@ return {
   keys = {
     { "<Leader>gg", "<cmd>LazyGit<cr>", desc = "LazyGit" },
   },
+  config = function()
+    vim.g.lazygit_use_neovim_remote = 1
+    vim.env.GIT_EDITOR = "nvr --remote-tab-wait-silent"
+  end,
 }

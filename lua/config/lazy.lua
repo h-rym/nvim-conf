@@ -39,5 +39,6 @@ require("lazy").setup({
     { import = "plugins.fidget" },
     { import = "plugins.trouble" },
     { import = "plugins.lazygit" },
+    { import = "plugins.gitsigns" },
   },
 })
