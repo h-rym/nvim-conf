@@ -23,6 +23,12 @@ vim.opt.smartcase = true
 -- マウス操作を有効にする
 vim.opt.mouse = "a"
 
+-- カーソル行をハイライト
+vim.opt.cursorline = true
+
+-- スクロール時に上下に余白を確保
+vim.opt.scrolloff = 8
+
 -- keymap
 vim.keymap.set('i', 'jk', '<Esc>')
 vim.keymap.set('v', 'jk', '<Esc>')
