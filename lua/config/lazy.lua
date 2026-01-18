@@ -44,5 +44,6 @@ require("lazy").setup({
     { import = "plugins.octo" },
     { import = "plugins.peek" },
     { import = "plugins.lint" },
+    { import = "plugins.noice" },
   },
 })

@@ -1,10 +1,11 @@
 return {
   "hrsh7th/nvim-cmp",
-  event = "InsertEnter",
+  event = { "InsertEnter", "CmdlineEnter" },
   dependencies = {
     "hrsh7th/cmp-nvim-lsp",
     "hrsh7th/cmp-buffer",
     "hrsh7th/cmp-path",
+    "hrsh7th/cmp-cmdline",
     "L3MON4D3/LuaSnip",
     "saadparwaiz1/cmp_luasnip",
   },
@@ -49,6 +50,28 @@ return {
       }, {
         { name = "buffer" },
         { name = "path" },
+      }),
+    })
+
+    local cmdline_mapping = cmp.mapping.preset.cmdline({
+      ["<CR>"] = cmp.mapping.confirm({ select = false }),
+    })
+
+    -- `/` 検索補完
+    cmp.setup.cmdline({ "/", "?" }, {
+      mapping = cmdline_mapping,
+      sources = {
+        { name = "buffer" },
+      },
+    })
+
+    -- `:` コマンドライン補完
+    cmp.setup.cmdline(":", {
+      mapping = cmdline_mapping,
+      sources = cmp.config.sources({
+        { name = "path" },
+      }, {
+        { name = "cmdline" },
       }),
     })
   end,
