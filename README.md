@@ -7,6 +7,7 @@
 - lazygit (for lazygit.nvim)
 - neovim-remote (for lazygit.nvim integration)
 - gh CLI (for octo.nvim)
+- deno (for peek.nvim)
 - Nerd Font (for icons)
 
 ## Plugins
@@ -40,6 +41,7 @@
 | [gitsigns.nvim](https://github.com/lewis6991/gitsigns.nvim) | Git signs / blame |
 | [diffview.nvim](https://github.com/sindrets/diffview.nvim) | Git diff / history viewer |
 | [octo.nvim](https://github.com/pwntester/octo.nvim) | GitHub PR / Issue manager |
+| [peek.nvim](https://github.com/toppair/peek.nvim) | Markdown preview |
 
 ## Keymaps
 
@@ -203,6 +205,12 @@
 | `<Space>oi` | List issues |
 | `<Space>or` | Start review |
 
+### Markdown
+
+| Key | Action |
+|-----|--------|
+| `<Space>mp` | Toggle preview |
+
 ## Directory Structure
 
 ```
@@ -229,6 +237,7 @@
         ├── nvim-tree.lua
         ├── octo.lua
         ├── oil.lua
+        ├── peek.lua
         ├── sleuth.lua
         ├── surround.lua
         ├── targets.lua
