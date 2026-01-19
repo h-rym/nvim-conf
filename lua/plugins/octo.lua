@@ -8,6 +8,7 @@ return {
   },
   keys = {
     { "<Leader>op", "<cmd>Octo pr list<cr>", desc = "PR 一覧" },
+    { "<Leader>oc", "<cmd>Octo pr create<cr>", desc = "PR 作成" },
     { "<Leader>oi", "<cmd>Octo issue list<cr>", desc = "Issue 一覧" },
     { "<Leader>or", "<cmd>Octo review start<cr>", desc = "レビュー開始" },
   },
