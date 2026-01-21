@@ -78,7 +78,17 @@ return {
 
     -- `:` コマンドライン補完
     cmp.setup.cmdline(":", {
-      mapping = cmp.mapping.preset.cmdline(),
+      mapping = cmp.mapping.preset.cmdline({
+        ["<CR>"] = cmp.mapping({
+          c = function(fallback)
+            if cmp.visible() and cmp.get_selected_entry() then
+              cmp.confirm({ select = false })
+            else
+              fallback()
+            end
+          end,
+        }),
+      }),
       sources = cmp.config.sources({
         { name = "path" },
       }, {
