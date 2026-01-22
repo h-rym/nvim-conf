@@ -179,6 +179,7 @@
 | Key | Action |
 |-----|--------|
 | `<Space>gg` | Open LazyGit |
+| `<Space>gf` | Git fetch all |
 
 ### Git (gitsigns)
 
@@ -209,9 +210,25 @@
 
 | Key | Action |
 |-----|--------|
-| `<Space>op` | List PRs |
+| `<Space>op` | List review-requested PRs |
+| `<Space>oo` | Search review-requested PRs (for checkout) |
+| `<Space>oc` | Create PR |
 | `<Space>oi` | List issues |
 | `<Space>or` | Start review |
+| `<Space>oR` | Resume review |
+| `<Space>od` | Discard review |
+| `<Space>os` | Submit review |
+| `<Space>ob` | Open in browser |
+
+#### In review diffview
+
+| Key | Action |
+|-----|--------|
+| `<Space>ca` | Add comment |
+| `<Space>cs` | Add suggestion |
+| `]q` / `[q` | Next / previous file |
+| `<Space>oq` | Close review tab |
+| `gf` | Open file in new tab |
 
 ### Markdown
 
