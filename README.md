@@ -185,7 +185,7 @@
 
 | Key | Action |
 |-----|--------|
-| `]c` / `[c` | Next / previous hunk |
+| `]h` / `[h` | Next / previous hunk |
 | `<Space>gs` | Stage hunk |
 | `<Space>gr` | Reset hunk |
 | `<Space>gS` | Stage buffer |

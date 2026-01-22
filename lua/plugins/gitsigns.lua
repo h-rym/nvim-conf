@@ -15,21 +15,8 @@ return {
       local opts = { buffer = bufnr }
 
       -- Navigation
-      vim.keymap.set("n", "]c", function()
-        if vim.wo.diff then
-          vim.cmd.normal({ "]c", bang = true })
-        else
-          gitsigns.nav_hunk("next")
-        end
-      end, { buffer = bufnr, desc = "次の変更へ" })
-
-      vim.keymap.set("n", "[c", function()
-        if vim.wo.diff then
-          vim.cmd.normal({ "[c", bang = true })
-        else
-          gitsigns.nav_hunk("prev")
-        end
-      end, { buffer = bufnr, desc = "前の変更へ" })
+      vim.keymap.set("n", "]h", function() gitsigns.nav_hunk("next") end, { buffer = bufnr, desc = "次の変更へ" })
+      vim.keymap.set("n", "[h", function() gitsigns.nav_hunk("prev") end, { buffer = bufnr, desc = "前の変更へ" })
 
       -- Actions
       vim.keymap.set("n", "<Leader>gs", gitsigns.stage_hunk, { buffer = bufnr, desc = "変更をステージ" })
