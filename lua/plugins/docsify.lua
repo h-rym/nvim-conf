@@ -13,8 +13,7 @@ return {
         end
         local nvim_dir = vim.fn.expand("~/.config/nvim")
         local docsify_bin = nvim_dir .. "/node_modules/.bin/docsify"
-        local docsify_dir = git_root .. "/.docsify"
-        local index_html = docsify_dir .. "/index.html"
+        local index_html = git_root .. "/index.html"
 
         -- ディレクトリパスからポート番号を生成（3000-3999の範囲）
         local function get_port(path)
@@ -25,11 +24,7 @@ return {
           return 3000 + (sum % 1000)
         end
 
-        -- .docsifyディレクトリとindex.htmlを作成
-        if vim.fn.isdirectory(docsify_dir) == 0 then
-          vim.fn.mkdir(docsify_dir, "p")
-        end
-
+        -- index.htmlを作成（存在しない場合のみ）
         if vim.fn.filereadable(index_html) == 0 then
           local html = [[<!DOCTYPE html>
 <html>
@@ -41,7 +36,6 @@ return {
   <div id="app"></div>
   <script>
     window.$docsify = {
-      basePath: '../',
       loadSidebar: true,
       auto2top: true,
       mermaidConfig: { theme: 'default' },
@@ -58,7 +52,7 @@ return {
 
         local port = get_port(git_root)
 
-        vim.fn.jobstart({ docsify_bin, "serve", docsify_dir, "--port", tostring(port) }, { detach = true })
+        vim.fn.jobstart({ docsify_bin, "serve", git_root, "--port", tostring(port) }, { detach = true })
         vim.defer_fn(function()
           vim.fn.jobstart({ "open", "http://localhost:" .. port }, { detach = true })
         end, 1000)
