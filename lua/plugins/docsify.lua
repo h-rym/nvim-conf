@@ -1,3 +1,20 @@
+-- ディレクトリパスからポート番号を生成（3000-3999の範囲）
+local function get_port(path)
+  local sum = 0
+  for i = 1, #path do
+    sum = sum + string.byte(path, i)
+  end
+  return 3000 + (sum % 1000)
+end
+
+local function get_git_root()
+  local git_root = vim.fn.systemlist("git rev-parse --show-toplevel")[1]
+  if vim.v.shell_error ~= 0 or not git_root then
+    return nil
+  end
+  return git_root
+end
+
 return {
   dir = ".",
   name = "docsify",
@@ -5,9 +22,8 @@ return {
     {
       "<Leader>md",
       function()
-        -- gitリポジトリのルートを取得
-        local git_root = vim.fn.systemlist("git rev-parse --show-toplevel")[1]
-        if vim.v.shell_error ~= 0 or not git_root then
+        local git_root = get_git_root()
+        if not git_root then
           vim.notify("Git repository not found", vim.log.levels.ERROR)
           return
         end
@@ -15,16 +31,7 @@ return {
         local docsify_bin = nvim_dir .. "/node_modules/.bin/docsify"
         local index_html = git_root .. "/docsify.html"
 
-        -- ディレクトリパスからポート番号を生成（3000-3999の範囲）
-        local function get_port(path)
-          local sum = 0
-          for i = 1, #path do
-            sum = sum + string.byte(path, i)
-          end
-          return 3000 + (sum % 1000)
-        end
-
-        -- index.htmlを作成（存在しない場合のみ）
+        -- docsify.htmlを作成（存在しない場合のみ）
         if vim.fn.filereadable(index_html) == 0 then
           local html = [[<!DOCTYPE html>
 <html>
@@ -58,7 +65,24 @@ return {
         end, 1000)
         vim.notify("Docsify started on port " .. port, vim.log.levels.INFO)
       end,
-      desc = "Docsify プレビュー起動",
+      desc = "Docsify サーバー起動",
+    },
+    {
+      "<Leader>mo",
+      function()
+        local git_root = get_git_root()
+        if not git_root then
+          vim.notify("Git repository not found", vim.log.levels.ERROR)
+          return
+        end
+
+        local file_path = vim.fn.expand("%:p")
+        local relative = file_path:gsub(git_root .. "/", ""):gsub("%.md$", "")
+        local port = get_port(git_root)
+
+        vim.fn.jobstart({ "open", "http://localhost:" .. port .. "/#/" .. relative }, { detach = true })
+      end,
+      desc = "現在のファイルをdocsifyで開く",
     },
   },
 }
