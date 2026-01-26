@@ -7,6 +7,7 @@ return {
     "nvim-tree/nvim-web-devicons",
   },
   keys = {
+    { "<Leader>oo", "<cmd>Octo pr<cr>", desc = "現在ブランチのPRを開く" },
     { "<Leader>op", "<cmd>Octo pr search review-requested:@me is:open<cr>", desc = "レビュー依頼PR一覧" },
     { "<Leader>oc", "<cmd>Octo pr create<cr>", desc = "PR 作成" },
     { "<Leader>ok", "<cmd>Octo pr checkout<cr>", desc = "PRブランチにチェックアウト" },
