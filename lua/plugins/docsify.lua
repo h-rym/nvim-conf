@@ -5,11 +5,15 @@ return {
     {
       "<Leader>md",
       function()
-        -- 現在開いているファイルのディレクトリを取得
-        local file_dir = vim.fn.expand("%:p:h")
+        -- gitリポジトリのルートを取得
+        local git_root = vim.fn.systemlist("git rev-parse --show-toplevel")[1]
+        if vim.v.shell_error ~= 0 or not git_root then
+          vim.notify("Git repository not found", vim.log.levels.ERROR)
+          return
+        end
         local nvim_dir = vim.fn.expand("~/.config/nvim")
         local docsify_bin = nvim_dir .. "/node_modules/.bin/docsify"
-        local docsify_dir = file_dir .. "/.docsify"
+        local docsify_dir = git_root .. "/.docsify"
         local index_html = docsify_dir .. "/index.html"
 
         -- ディレクトリパスからポート番号を生成（3000-3999の範囲）
@@ -52,7 +56,7 @@ return {
           vim.fn.writefile(vim.split(html, "\n"), index_html)
         end
 
-        local port = get_port(file_dir)
+        local port = get_port(git_root)
 
         vim.fn.jobstart({ docsify_bin, "serve", docsify_dir, "--port", tostring(port) }, { detach = true })
         vim.defer_fn(function()
