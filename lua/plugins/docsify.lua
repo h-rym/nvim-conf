@@ -5,10 +5,11 @@ return {
     {
       "<Leader>md",
       function()
-        local cwd = vim.fn.getcwd()
+        -- 現在開いているファイルのディレクトリを取得
+        local file_dir = vim.fn.expand("%:p:h")
         local nvim_dir = vim.fn.expand("~/.config/nvim")
         local docsify_bin = nvim_dir .. "/node_modules/.bin/docsify"
-        local docsify_dir = cwd .. "/.docsify"
+        local docsify_dir = file_dir .. "/.docsify"
         local index_html = docsify_dir .. "/index.html"
 
         -- ディレクトリパスからポート番号を生成（3000-3999の範囲）
@@ -51,7 +52,7 @@ return {
           vim.fn.writefile(vim.split(html, "\n"), index_html)
         end
 
-        local port = get_port(cwd)
+        local port = get_port(file_dir)
 
         vim.fn.jobstart({ docsify_bin, "serve", docsify_dir, "--port", tostring(port) }, { detach = true })
         vim.defer_fn(function()
