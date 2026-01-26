@@ -61,8 +61,6 @@ return {
         local file_path = vim.fn.expand("%:p")
         local relative = file_path:sub(#git_root + 2)
         local url = "http://localhost:" .. port .. "/#/" .. relative
-        local log = "git_root: " .. git_root .. "\nfile_path: " .. file_path .. "\nrelative: " .. relative .. "\nurl: " .. url
-        vim.fn.writefile(vim.split(log, "\n"), "/tmp/docsify_debug.log")
         vim.fn.jobstart({ docsify_bin, "serve", git_root, "--port", tostring(port), "--index-name", "docsify.html" })
         vim.defer_fn(function()
           vim.fn.jobstart({ "open", url }, { detach = true })
