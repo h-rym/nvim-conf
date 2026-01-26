@@ -42,7 +42,6 @@ require("lazy").setup({
     { import = "plugins.gitsigns" },
     { import = "plugins.diffview" },
     { import = "plugins.octo" },
-    { import = "plugins.markdown-preview" },
     { import = "plugins.autotag" },
     { import = "plugins.colorizer" },
     { import = "plugins.lint" },
