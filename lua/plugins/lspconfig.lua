@@ -108,6 +108,39 @@ return {
     }
     vim.lsp.enable("terraformls")
 
+    vim.lsp.config.intelephense = {
+      cmd = { "intelephense", "--stdio" },
+      filetypes = { "php" },
+      root_markers = { "composer.json", ".git" },
+      capabilities = capabilities,
+    }
+    vim.lsp.enable("intelephense")
+
+    vim.lsp.config.yamlls = {
+      cmd = { "yaml-language-server", "--stdio" },
+      filetypes = { "yaml", "yaml.docker-compose" },
+      root_markers = { ".git" },
+      capabilities = capabilities,
+      settings = {
+        yaml = {
+          schemas = {
+            ["https://json.schemastore.org/github-workflow.json"] = "/.github/workflows/*",
+            ["https://raw.githubusercontent.com/compose-spec/compose-spec/master/schema/compose-spec.json"] = "compose*.yaml",
+            ["https://taskfile.dev/schema.json"] = "Taskfile*.yaml",
+          },
+        },
+      },
+    }
+    vim.lsp.enable("yamlls")
+
+    vim.lsp.config.dockerls = {
+      cmd = { "docker-langserver", "--stdio" },
+      filetypes = { "dockerfile" },
+      root_markers = { "Dockerfile", ".git" },
+      capabilities = capabilities,
+    }
+    vim.lsp.enable("dockerls")
+
     -- Terraform: 保存時に terraform fmt を実行
     vim.api.nvim_create_autocmd("BufWritePre", {
       pattern = { "*.tf", "*.tfvars" },
