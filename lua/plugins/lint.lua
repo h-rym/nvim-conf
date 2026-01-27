@@ -43,6 +43,22 @@ return {
       return find_project_root({ ".prettierrc", ".prettierrc.js", ".prettierrc.cjs", ".prettierrc.json", ".prettierrc.yml", "prettier.config.js", "prettier.config.cjs" }) ~= nil
     end
 
+    local function has_phpstan()
+      return find_project_root({ "phpstan.neon", "phpstan.neon.dist", "phpstan.dist.neon" }) ~= nil
+    end
+
+    -- プロジェクトのvendor/binからPHPバイナリを探す
+    local function find_php_bin(name)
+      local project_root = find_project_root({ "composer.json" })
+      if project_root then
+        local vendor_bin = project_root .. "/vendor/bin/" .. name
+        if vim.fn.executable(vendor_bin) == 1 then
+          return vendor_bin, project_root
+        end
+      end
+      return nil, nil
+    end
+
     -- textlint のカスタム定義
     lint.linters.textlint = {
       cmd = nvim_dir .. "/node_modules/.bin/textlint",
@@ -112,6 +128,38 @@ return {
       end,
     }
 
+    -- phpstan のカスタム定義（cmdは動的に設定）
+    lint.linters.phpstan = {
+      cmd = "phpstan",
+      stdin = false,
+      args = { "analyze", "--error-format=json", "--no-progress" },
+      stream = "stdout",
+      ignore_exitcode = true,
+      append_fname = true,
+      parser = function(output, bufnr)
+        if output == "" then
+          return {}
+        end
+        local ok, decoded = pcall(vim.json.decode, output)
+        if not ok then
+          return {}
+        end
+        local diagnostics = {}
+        for _, file in pairs(decoded.files or {}) do
+          for _, msg in ipairs(file.messages or {}) do
+            table.insert(diagnostics, {
+              lnum = (msg.line or 1) - 1,
+              col = 0,
+              severity = msg.ignorable and vim.diagnostic.severity.WARN or vim.diagnostic.severity.ERROR,
+              message = msg.message,
+              source = "phpstan",
+            })
+          end
+        end
+        return diagnostics
+      end,
+    }
+
     -- eslint のカスタム定義（cmdは動的に設定）
     lint.linters.eslint_nvim = {
       cmd = "eslint",
@@ -154,7 +202,7 @@ return {
       markdown = { "textlint" },
     }
 
-    -- 自動でlintを実行（プロジェクトのnode_modulesを使用）
+    -- 自動でlintを実行（プロジェクトのnode_modules/vendorを使用）
     vim.api.nvim_create_autocmd({ "BufWritePost", "BufReadPost", "InsertLeave" }, {
       callback = function()
         local ft = vim.bo.filetype
@@ -170,6 +218,15 @@ return {
             if bin then
               lint.linters.eslint_nvim.cmd = bin
               lint.try_lint({ "eslint_nvim" })
+            end
+          end
+        elseif ft == "php" then
+          if has_phpstan() then
+            local bin, project_root = find_php_bin("phpstan")
+            if bin and project_root then
+              lint.linters.phpstan.cmd = bin
+              lint.linters.phpstan.cwd = project_root
+              lint.try_lint({ "phpstan" })
             end
           end
         else
